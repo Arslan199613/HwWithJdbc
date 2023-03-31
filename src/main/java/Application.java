@@ -14,11 +14,11 @@ public class Application {
     public static void main(String[] args) throws SQLException {
 
         //Добавление работника.
-       employeeDAO.addEmployee(new Employee("Михаил", "Васильев", 40, new City(1)));
+        employeeDAO.addEmployee(new Employee("Владисав", "Васильев", 40, new City(1)));
         //Получение работника по ID
-       System.out.println(employeeDAO.findEmployeeById(10));
-        //Получение списка работников
-       System.out.println(employeeDAO.getAll());
+        System.out.println(employeeDAO.findEmployeeById(1));
+        //Получение списка работнико
+        System.out.println(employeeDAO.getAll());
         //Обновление данных по id
         employeeDAO.update(1, 60);
         //Удаление данных по id

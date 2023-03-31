@@ -29,7 +29,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return employee;
+        return null;
     }
 
     @Override
