@@ -1,6 +1,7 @@
-package sky.project.models.dao;
+package sky.project.models.services;
 
 import sky.project.models.connection.ApplicationConnection;
+import sky.project.models.dao.EmployeeDAO;
 import sky.project.models.models.City;
 import sky.project.models.models.Employee;
 
@@ -20,17 +21,20 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                      applicationConnection.getPreparedStatement("SELECT * FROM employees INNER JOIN city ON employees.city_id=city.city_id AND id=(?)")) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                employee.setFirst_name(resultSet.getString("first_name"));
-                employee.setLast_name(resultSet.getString("last_name"));
-                employee.setAge(resultSet.getInt("age"));
-                employee.setCity(new City(resultSet.getString("city_name")));
+            if (resultSet.next()) {
+                    employee.setFirst_name(resultSet.getString("first_name"));
+                    employee.setLast_name(resultSet.getString("last_name"));
+                    employee.setAge(resultSet.getInt("age"));
+                    employee.setCity(new City(resultSet.getString("city_name")));
+                } else {
+                    throw new RuntimeException("Пользователя с таким id нет");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return employee;
     }
+
 
     @Override
     public void addEmployee(Employee employee) throws SQLException {
